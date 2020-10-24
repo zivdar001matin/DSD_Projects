@@ -46,9 +46,9 @@ BEGIN
                     temp <= temp - 1;
                 END IF;
             END IF;
+            dout <= temp;
         END IF;
     END PROCESS;
 
-    dout <= temp;
 
 END behavioral;
