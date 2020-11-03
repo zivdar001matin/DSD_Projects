@@ -29,17 +29,19 @@ END alu;
 
 -- Entity Architecture
 ARCHITECTURE arch OF alu IS
-    SIGNAL s_temp : signed(g_size - 1 DOWNTO 0);
+    -- Design decision
+    CONSTANT c_zero : signed(g_size -1 DOWNTO 0) := (others => '0');
+
 BEGIN
     PROCESS(p_A, p_B, p_cin, p_sin, p_funct)
     BEGIN
         IF p_funct = "0000" THEN
             p_Z <= NOT p_B(g_size - 1) & p_B(g_size - 2 DOWNTO 0);
-        ELSIF p_funct = "0001" THEN
+        ELSIF p_funct = "0001" THEN -- TODO p_cout
             p_Z <= p_A + p_B;
-        ELSIF p_funct = "0010" THEN
+        ELSIF p_funct = "0010" THEN -- TODO p_cout
             p_Z <= p_A + p_B + p_cin;
-        ELSIF p_funct = "0011" THEN
+        ELSIF p_funct = "0011" THEN -- TODO p_cout
             p_Z <= p_A - p_B;
         ELSIF p_funct = "0100" THEN
             p_Z <= -p_B;
@@ -61,26 +63,26 @@ BEGIN
         ELSIF p_funct = "1100" THEN
             p_Z <= p_sin & p_A(g_size - 1 DOWNTO 1);
             p_sout <= p_A(0);
-        ELSIF p_funct = "1101" THEN    -- TODO
+        ELSIF p_funct = "1101" THEN
             IF p_A > p_B THEN
-                p_Z <= (others => '1');
+                p_Z <= c_zero + 1;
             ELSE
-                p_Z <=  (others => '0');
+                p_Z <=  c_zero;
             END IF;
-        ELSIF p_funct = "1110" THEN    -- TODO
+        ELSIF p_funct = "1110" THEN
             IF p_A < p_B THEN
-                p_Z <= (others => '1');
+                p_Z <= c_zero + 1;
             ELSE
-                p_Z <=  (others => '0');
+                p_Z <= c_zero;
             END IF;
-        ELSIF p_funct = "1111" THEN    -- TODO
+        ELSIF p_funct = "1111" THEN
             IF p_A = p_B THEN
-                p_Z <= (others => '1');
+                p_Z <= c_zero + 1;
             ELSE
-                p_Z <=  (others => '0');
+                p_Z <= c_zero;
             END IF;
         ELSE
-            p_Z <=  (others => '0');
+            p_Z <= c_zero;
         END IF;
     END PROCESS;
 END arch;
