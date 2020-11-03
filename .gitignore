@@ -1,2 +1,5 @@
 # ignore work libraries created for compiling
 work/
+
+# ignore wave logs
+*.wlf
