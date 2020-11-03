@@ -23,4 +23,4 @@ sim:/alu_tb/t_cout \
 sim:/alu_tb/t_Ov \
 sim:/alu_tb/t_Z
 
-run 350ns
+run 320ns

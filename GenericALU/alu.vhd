@@ -17,7 +17,7 @@ ENTITY alu IS
     PORT(
         p_A     : IN signed(g_size - 1 DOWNTO 0);
         p_B     : IN signed(g_size - 1 DOWNTO 0);
-        p_cin   : IN std_logic;
+        p_cin   : IN integer;
         p_sin   : IN std_logic;
         p_funct : IN signed(3 DOWNTO 0);
         p_sout  : OUT std_logic;
@@ -29,19 +29,20 @@ END alu;
 
 -- Entity Architecture
 ARCHITECTURE arch OF alu IS
+    SIGNAL s_temp : signed(g_size - 1 DOWNTO 0);
 BEGIN
     PROCESS(p_A, p_B, p_cin, p_sin, p_funct)
     BEGIN
-        IF p_funct = "0000" THEN   -- TODO
-            p_Z <= p_B;
+        IF p_funct = "0000" THEN
+            p_Z <= NOT p_B(g_size - 1) & p_B(g_size - 2 DOWNTO 0);
         ELSIF p_funct = "0001" THEN
             p_Z <= p_A + p_B;
-        ELSIF p_funct = "0010" THEN   -- TODO
-            p_Z <= (p_A + p_B);
+        ELSIF p_funct = "0010" THEN
+            p_Z <= p_A + p_B + p_cin;
         ELSIF p_funct = "0011" THEN
             p_Z <= p_A - p_B;
-        ELSIF p_funct = "0100" THEN   -- TODO
-            p_Z <= p_B;
+        ELSIF p_funct = "0100" THEN
+            p_Z <= -p_B;
         ELSIF p_funct = "0101" THEN
             p_Z <= NOT p_B;
         ELSIF p_funct = "0110" THEN

@@ -18,7 +18,7 @@ ARCHITECTURE test OF alu_tb IS
         PORT(
             p_A     : IN signed(g_size - 1 DOWNTO 0);
             p_B     : IN signed(g_size - 1 DOWNTO 0);
-            p_cin   : IN std_logic;
+            p_cin   : IN integer;
             p_sin   : IN std_logic;
             p_funct : IN signed(3 DOWNTO 0);
             p_sout  : OUT std_logic;
@@ -31,7 +31,7 @@ ARCHITECTURE test OF alu_tb IS
     --Test Signals
     SIGNAL t_A      : signed(7 DOWNTO 0);
     SIGNAL t_B      : signed(7 DOWNTO 0);
-    SIGNAL t_cin    : std_logic;
+    SIGNAL t_cin    : integer;
     SIGNAL t_sin    : std_logic;
     SIGNAL t_funct  : signed(3 DOWNTO 0) := "0000";
     SIGNAL t_sout   : std_logic;
@@ -45,7 +45,7 @@ BEGIN
 
     t_A <= X"0A";
     t_B <= X"01";
-    t_cin <= '1';
+    t_cin <= 1;
     t_sin <= '1';
-    t_funct <= (t_funct + "1") AFTER 20ns;
+    t_funct <= (t_funct - "1") AFTER 20ns;
 END test;
