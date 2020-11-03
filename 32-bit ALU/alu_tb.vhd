@@ -1,2 +1,51 @@
+
+-- t_<name> corresponds to Test Signals
+
+-- Packages
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+use ieee.numeric_std.all;
+
+-- Entity isn't needed for testbench
 ENTITy alu_tb IS
 END alu_tb;
+
+ARCHITECTURE test OF alu_tb IS
+    COMPONENT alu IS
+        GENERIC (
+            g_size : integer := 32
+        );
+        PORT(
+            p_A     : IN signed(g_size - 1 DOWNTO 0);
+            p_B     : IN signed(g_size - 1 DOWNTO 0);
+            p_cin   : IN std_logic;
+            p_sin   : IN std_logic;
+            p_funct : IN signed(3 DOWNTO 0);
+            p_sout  : OUT std_logic;
+            p_cout  : OUT std_logic;
+            p_Ov    : OUT std_logic;
+            p_Z     : OUT signed(g_size - 1 DOWNTO 0)
+        );
+    END COMPONENT;
+
+    --Test Signals
+    SIGNAL t_A      : signed(7 DOWNTO 0);
+    SIGNAL t_B      : signed(7 DOWNTO 0);
+    SIGNAL t_cin    : std_logic;
+    SIGNAL t_sin    : std_logic;
+    SIGNAL t_funct  : signed(3 DOWNTO 0) := "0000";
+    SIGNAL t_sout   : std_logic;
+    SIGNAL t_cout   : std_logic;
+    SIGNAL t_Ov     : std_logic;
+    SIGNAL t_Z      : signed(7 DOWNTO 0);
+
+BEGIN
+    -- Entity Instantiation
+    CUT: alu GENERIC MAP (8) PORT MAP (t_A, t_B, t_cin, t_sin, t_funct, t_sout, t_cout, t_Ov, t_Z);
+
+    t_A <= X"0A";
+    t_B <= X"01";
+    t_cin <= '1';
+    t_sin <= '1';
+    t_funct <= (t_funct + "1") AFTER 20ns;
+END test;
