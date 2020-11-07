@@ -15,3 +15,15 @@ ENTITY sram IS
         dout        :   OUT std_logic_vector(data_wid-1 DOWNTO 0)
     );
 END sram;
+ARCHITECTURE test OF sram IS
+    TYPE mem_type IS ARRAY (0 TO row_num) OF std_logic_vector(data_wid-1 DOWNTO 0);
+    SIGNAL buf : mem_type := (OTHERS=> (OTHERS=>'0'));
+BEGIN
+    PROCESS (clk)
+    BEGIN
+        IF rnw='0' THEN
+            buf(conv_integer(addr)) <= din;
+        END IF;
+    END PROCESS;
+    dout <= buf(conv_integer(addr));
+END test;
