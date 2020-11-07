@@ -65,15 +65,15 @@ BEGIN
         ELSIF p_funct = "1000" THEN
             p_Z <= p_A XOR p_B;
         ELSIF p_funct = "1001" THEN
-            p_Z <= p_A sll 1;
+            p_Z <= p_A(g_size  - 2 DOWNTO 0) & p_sin;
+            p_sout <= p_A(g_size  - 1);
         ELSIF p_funct = "1010" THEN
-            p_Z <= p_A srl 1;
-        ELSIF p_funct = "1011" THEN
-            p_Z <= p_A(g_size - 2 DOWNTO 0) & p_sin;
-            p_sout <= p_A(g_size - 1);
-        ELSIF p_funct = "1100" THEN
-            p_Z <= p_sin & p_A(g_size - 1 DOWNTO 1);
+            p_Z <= p_sin & p_A(g_size  - 1 DOWNTO 1);
             p_sout <= p_A(0);
+        ELSIF p_funct = "1011" THEN
+            p_Z <= p_A rol 1;
+        ELSIF p_funct = "1100" THEN
+            p_Z <= p_A ror 1;
         ELSIF p_funct = "1101" THEN
             IF p_A > p_B THEN
                 p_Z <= c_zero + 1;
