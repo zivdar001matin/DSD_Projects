@@ -2,7 +2,7 @@
 -- compile alu.vhd and alu_tb.vhd --
 ------------------------------------
 vcom -reportprogress 300 -work work D:/university/term_5/DSD/Project/GenericALU/alu.vhd
-vcom -reportprogress 300 -work work D:/university/term_5/DSD/Project/GenericALU/alu_tb.vhd
+vcom -reportprogress 300 -work work D:/university/term_5/DSD/Project/GenericALU/alu_tb0.vhd
 
 ----------------------
 -- start simulation --
