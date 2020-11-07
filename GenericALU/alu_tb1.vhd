@@ -1,4 +1,6 @@
 
+-- g_<name> corresponds to Generic
+-- p_<name> corresponds to Port
 -- t_<name> corresponds to Test Signals
 
 -- Packages
