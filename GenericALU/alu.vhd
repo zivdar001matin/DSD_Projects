@@ -32,16 +32,27 @@ ARCHITECTURE arch OF alu IS
     -- Design decision
     CONSTANT c_zero : signed(g_size -1 DOWNTO 0) := (others => '0');
 
+    SIGNAL s_AplusB         : signed(g_size DOWNTO 0);
+    SIGNAL s_AplusBplusCin  : signed(g_size DOWNTO 0);
+
 BEGIN
+    s_AplusB <= ('0' & p_A) + ('0' & p_B);
+    s_AplusBplusCin <= ('0' & p_A) + ('0' & p_B) + p_cin;
     PROCESS(p_A, p_B, p_cin, p_sin, p_funct)
     BEGIN
         IF p_funct = "0000" THEN
             p_Z <= NOT p_B(g_size - 1) & p_B(g_size - 2 DOWNTO 0);
-        ELSIF p_funct = "0001" THEN -- TODO p_cout
-            p_Z <= p_A + p_B;
-        ELSIF p_funct = "0010" THEN -- TODO p_cout
-            p_Z <= p_A + p_B + p_cin;
-        ELSIF p_funct = "0011" THEN -- TODO p_cout
+        ELSIF p_funct = "0001" THEN
+            p_Z <= s_AplusB(g_size - 1 DOWNTO 0);
+            p_cout <= s_AplusB(g_size);
+            p_Ov <= (p_A(g_size - 1) AND p_B(g_size - 1) AND NOT s_AplusB(g_size - 1)) OR
+                (NOT p_A(g_size - 1) AND NOT p_B(g_size - 1) AND s_AplusB(g_size - 1));
+        ELSIF p_funct = "0010" THEN
+            p_Z <= s_AplusBplusCin(g_size - 1 DOWNTO 0);
+            p_cout <= s_AplusBplusCin(g_size);
+            p_Ov <= (p_A(g_size - 1) AND p_B(g_size - 1) AND NOT s_AplusBplusCin(g_size - 1)) OR
+                (NOT p_A(g_size - 1) AND NOT p_B(g_size - 1) AND s_AplusBplusCin(g_size - 1));
+        ELSIF p_funct = "0011" THEN
             p_Z <= p_A - p_B;
         ELSIF p_funct = "0100" THEN
             p_Z <= -p_B;
