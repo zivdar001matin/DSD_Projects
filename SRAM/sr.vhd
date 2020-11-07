@@ -6,7 +6,7 @@ ENTITY sram IS
     GENERIC(
         row_num :   integer := 64;
         data_wid:   integer := 16;
-        addr-wid:   integer := 6
+        addr_wid:   integer := 6
     );
     PORT(
         clk, rnw    :   IN  std_logic;
