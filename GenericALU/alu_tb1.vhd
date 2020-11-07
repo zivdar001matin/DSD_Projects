@@ -47,5 +47,5 @@ BEGIN
     t_B <= X"60", X"01" AFTER 40ns, X"00" AFTER 60ns;
     t_cin <= 1;
     t_sin <= '1';
-    t_funct <= "0000" ,"0001" AFTER 20ns;
+    t_funct <= "0000" ,"0001" AFTER 20ns, "0010" AFTER 30ns, "0001" AFTER 50ns;
 END test;
