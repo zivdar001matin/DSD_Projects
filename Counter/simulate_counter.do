@@ -1,7 +1,7 @@
 -------------------------
 -- compile counter.vhd --
 -------------------------
-vcom -reportprogress 300 -work work D:/university/term_5/DSD/Project/Counter/counter.vhd
+vcom -reportprogress 300 -work work D:/%Git Repository%/Counter/counter.vhd
 
 ----------------------
 -- start simulation --

@@ -1,7 +1,7 @@
 ------------------------------------
 -- compile sr.vhd and sr_tb.vhd --
 ------------------------------------
-vcom -reportprogress 300 -work work D:/university/term_5/DSD/Project/SRAM/sr.vhd
+vcom -reportprogress 300 -work work D:/%Git Repository%/SRAM/sr.vhd
 
 ----------------------
 -- start simulation --
