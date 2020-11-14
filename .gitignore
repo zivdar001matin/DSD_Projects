@@ -3,3 +3,5 @@ work/
 
 # ignore wave logs
 *.wlf
+
+*.png
