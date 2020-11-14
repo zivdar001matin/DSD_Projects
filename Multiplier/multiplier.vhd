@@ -9,7 +9,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
 -- Entity Port and Generic
-ENTITY multiplier IS
+ENTITY mult IS
     GENERIC (
         g_n : integer := 4
     );
@@ -18,8 +18,8 @@ ENTITY multiplier IS
         p_s             : OUT std_logic_vector(2*g_n-1 DOWNTO 0);
         p_cout          : OUT std_logic
     );
-END multiplier;
-ARCHITECTURE combinational OF multiplier IS
+END mult;
+ARCHITECTURE combinational OF mult IS
     COMPONENT fa IS
         PORT(
             p_a     : IN std_logic;
