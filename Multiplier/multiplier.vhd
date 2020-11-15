@@ -33,10 +33,10 @@ ARCHITECTURE combinational OF mult IS
     TYPE Type_and IS ARRAY (2*g_size-2 DOWNTO 0) OF std_logic_vector(g_size-1 DOWNTO 0); 
     SIGNAL s_and  : Type_and;
     -- s_carry(i)(j) represents i column, j row
-    TYPE Type_carry IS ARRAY (2*g_size-3 DOWNTO 0) OF std_logic_vector(g_size DOWNTO 0); 
+    TYPE Type_carry IS ARRAY (g_size DOWNTO 0) OF std_logic_vector(2*g_size-4 DOWNTO 0); 
     SIGNAL s_carry : Type_carry;
     -- s_sum(i)(j) represents i row, j column 
-    TYPE Type_sum IS ARRAY (g_size+1 DOWNTO 0) OF std_logic_vector(g_size DOWNTO 0); 
+    TYPE Type_sum IS ARRAY (2*g_size-3 DOWNTO 0) OF std_logic_vector(g_size DOWNTO 0); 
     SIGNAL s_sum  : Type_sum;
 BEGIN
     s_carry(0) <= (others=>'0');
