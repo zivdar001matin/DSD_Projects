@@ -24,16 +24,16 @@ ARCHITECTURE test OF mult_tb IS
     END COMPONENT;
 
     --Test Signals
-    SIGNAL t_a      : std_logic_vector(3 DOWNTO 0);
-    SIGNAL t_b      : std_logic_vector(3 DOWNTO 0);
-    SIGNAL t_s      : std_logic_vector(5 DOWNTO 0);
+    SIGNAL t_a      : std_logic_vector(7 DOWNTO 0);
+    SIGNAL t_b      : std_logic_vector(7 DOWNTO 0);
+    SIGNAL t_s      : std_logic_vector(15 DOWNTO 0);
     SIGNAL t_cout   : std_logic;
 
 BEGIN
     -- Entity Instantiation
-    CUT: mult GENERIC MAP (4) PORT MAP (t_a, t_b, t_s, t_cout);
+    CUT: mult GENERIC MAP (8) PORT MAP (t_a, t_b, t_s, t_cout);
 
-    t_a <= X"A";
-    t_b <= X"1";
+    t_a <= X"BA";
+    t_b <= X"FA";
 
 END test;
