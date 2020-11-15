@@ -20,7 +20,7 @@ ENTITY mult IS
     );
 END mult;
 ARCHITECTURE combinational OF mult IS
-    COMPONENT fa IS
+    COMPONENT adder IS
         PORT(
             p_a     : IN std_logic;
             p_b     : IN std_logic;
