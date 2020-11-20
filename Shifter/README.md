@@ -34,3 +34,6 @@ Implementing barrel shifter that do Logical/Artihmetic/Circular shifts in both l
   </tr>
 </tbody>
 </table>
+
+# Refrences
+https://github.com/rubenvannieuwpoort/barrel_shifter
