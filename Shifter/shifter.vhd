@@ -21,7 +21,7 @@ ENTITY shifter IS
         p_din       : IN std_logic_vector(31 DOWNTO 0);
         p_sin       : IN std_logic;
         p_dout      : OUT std_logic_vector(31 DOWNTO 0);
-        p_sout      : OUT std_logic -- TODO
+        p_sout      : OUT std_logic
     );
 END shifter;
 -- Entity Architecture
@@ -33,6 +33,7 @@ BEGIN
         VARIABLE v_intermediate  : intermediate_results;
         VARIABLE v_shift_bit    : integer;
         VARIABLE v_sign_extend : std_logic;
+        VARIABLE v_sout : std_logic;
     BEGIN
     v_sign_extend := p_dir and p_shty(0) and s_register(31); -- used for arithmetic shift
     IF clk = '1' THEN
@@ -55,8 +56,10 @@ BEGIN
                     v_intermediate(i + 1)(31 downto v_shift_bit) := v_intermediate(i)(32 - v_shift_bit - 1 downto 0);
                     IF p_shty = "00" THEN       -- Shift Logical
                         v_intermediate(i + 1)(v_shift_bit - 1 downto 0) := (others => p_sin);
+                        v_sout := v_intermediate(i)(32 - v_shift_bit);
                     ELSIF p_shty = "01" THEN    -- Shift Arithmetic
                         v_intermediate(i + 1)(v_shift_bit - 1 downto 0) := (others => v_sign_extend);
+                        v_sout := v_intermediate(i)(32 - v_shift_bit);
                     ELSIF p_shty = "10" THEN    -- Shift Circular
                         v_intermediate(i + 1)(v_shift_bit - 1 downto 0) := v_intermediate(i)(31 downto 32 - v_shift_bit);
                     END IF;
@@ -74,6 +77,7 @@ BEGIN
             ELSE
                 s_register <= v_intermediate(5);
             END IF;
+            p_sout <= v_sout;
         END IF;
     END IF;
     p_dout <= s_register;
