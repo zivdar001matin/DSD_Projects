@@ -9,7 +9,6 @@
 -- Packages
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
-use ieee.numeric_std.all;
 
 -- Entity Port and Generic
 ENTITY shifter_tb IS 
