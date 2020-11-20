@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 # Adder
 Implementing n-bit sequential adder with Procces and Variable.
 
 ## Tips
-=======
-* Adder
-Implementing n-bit sequential adder with Procces and Variable.
-
-** Tips
->>>>>>> fbf81810a7057ef5a2026c3765572f5afe71f0cd
 1. To view Variable values in ModelSim simulation, follow these steps:
     1. First you should open adder.vhd in ModelSim (File -> Open -> adder.vhd).
     2. Put breakpoint on the line that we defined Variable c (line 18).
