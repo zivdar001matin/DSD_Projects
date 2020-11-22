@@ -27,10 +27,10 @@ Implementing barrel shifter that do Logical/Artihmetic/Circular shifts in both l
   </tr>
   <tr>
     <td rowspan="2">dir</td>
-    <td>0: Left to Right</td>
+    <td>0: Right to Left</td>
   </tr>
   <tr>
-    <td>1: Right to Left</td>
+    <td>1: Left to Right</td>
   </tr>
 </tbody>
 </table>
