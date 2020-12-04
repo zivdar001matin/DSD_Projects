@@ -47,7 +47,7 @@ BEGIN
             to_out <= "010110";
 
         ELSIF   curr_state = s3 THEN
-            IF (come(2)='1') OR (go(2)='1') THEN
+            IF (come(1)='0') AND (go(1)='0') THEN
                 next_state <= s4;
             ELSIF (come(1)='1') OR (go(1)='1') THEN
                 next_state <= s2;
@@ -65,7 +65,7 @@ BEGIN
             to_out <= "000100";
 
         ELSIF   curr_state = s5 THEN
-            IF (come(2)='1') OR (go(2)='1') THEN
+            IF (come(3)='0') AND (come(4)='0') AND (go(3)='0') AND (go(4)='0') THEN
                 next_state <= s4;
             ELSIF (come(3)='1') OR (come(4)='1') OR (go(3)='1') OR (go(4)='1') THEN
                 next_state <= s6;
@@ -85,7 +85,7 @@ BEGIN
             to_out <= "011010";
 
         ELSIF   curr_state = s8 THEN
-            IF (come(3)='1') OR (go(3)='1') THEN
+            IF (come(1)='0') AND (come(2)='0') AND (go(1)='0') AND (go(2)='0') THEN
                 next_state <= s9;
             ELSIF (come(1)='1') OR (come(2)='1') OR (go(1)='1') OR (go(2)='1') THEN
                 next_state <= s7;
@@ -103,7 +103,7 @@ BEGIN
             to_out <= "001000";
 
         ELSIF   curr_state = s10 THEN
-            IF (come(3)='1') OR (go(3)='1') THEN
+            IF (come(4)='0') AND (go(4)='0') THEN
                 next_state <= s9;
             ELSIF (come(4)='1') OR (go(4)='1') THEN
                 next_state <= s11;
@@ -134,10 +134,18 @@ BEGIN
     END PROCESS com;
 
     -- Sequential Part
-    seq: PROCESS (nreset, clk)
+    seq: PROCESS (nreset, clk, current_floor)
     BEGIN
         IF nreset = '0' THEN
-            curr_state <= s0;
+            IF      current_floor = "0001" THEN
+                curr_state <= s0;
+            ELSIF   current_floor = "0010" THEN
+                curr_state <= s4;
+            ELSIF   current_floor = "0100" THEN
+                curr_state <= s9;
+            ELSE -- current_floor = "1000" THEN
+                curr_state <= s13;
+            END IF;
         ELSIF clk='1' AND clk'EVENT THEN
             curr_state <= next_state;
         END IF;
