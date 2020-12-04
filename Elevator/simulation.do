@@ -5,4 +5,4 @@ vsim -novopt -gui work.elevator_tb -t ns
 
 do wave.do
 
-run 250 ns
+run 500 ns

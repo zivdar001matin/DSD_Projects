@@ -33,30 +33,33 @@ BEGIN
     BEGIN
         nreset_t <= '0';
         switch_t <= "0001";
-        WAIT FOR 12 ns;
+        WAIT FOR 12 ns; -- 12 ns
         nreset_t <= '1';
-        WAIT FOR 2 ns;
-        go_t <= "1000";     -- Go to 4th floor
-        WAIT FOR 5 ns;
+        WAIT FOR 22 ns; -- 34 ns
+        go_t(3) <= '1';     -- Person_1 wanna go to the 3rd floor
+        WAIT FOR 30 ns; -- 64 ns
         switch_t <= "0000"; -- Elevator between 1st and 2nd floor
-        WAIT FOR 5 ns;
-        come_t(1) <= '1';   -- Come 1st floor
-        WAIT FOR 5 ns;
-        come_t(2) <= '1';   -- Come 2nd floor
-        WAIT FOR 25 ns;
+        WAIT FOR 25 ns; -- 89 ns
+        come_t <= "0011";   -- Come 1st and 2nd floor
+        WAIT FOR 45 ns; -- 134 ns
         switch_t <= "0010"; -- Elevator arrives 2nd floor
-        WAIT FOR 10 ns;
+        come_t(2) <= '0';   -- Person_2 on the 2nd floor gets in
+        go_t(1) <= '1';     -- Person_2 wanna go to the 1st floor
+        WAIT FOR 30 ns; -- 164 ns
         switch_t <= "0000"; -- Elevator between 2nd and 3rd floor
-        WAIT FOR 30 ns;
+        WAIT FOR 50 ns; -- 214 ns
         switch_t <= "0100"; -- Elevator arrives 3rd floor
-        WAIT FOR 10 ns;
+        go_t(3) <= '0';     -- Person_1 gets out
+        WAIT FOR 30 ns; -- 244 ns
         switch_t <= "0000"; -- Elevator between 2nd and 3rd floor
-        WAIT FOR 30 ns;
+        WAIT FOR 50 ns; -- 294 ns
         switch_t <= "0010"; -- Elevator arrives 2nd floor
-        WAIT FOR 10 ns;
+        WAIT FOR 30 ns; -- 324 ns
         switch_t <= "0000"; -- Elevator between 1st and 2nd
-        WAIT FOR 30 ns;
-        switch_t <= "0010"; -- Elevator arrives 1st floor
+        WAIT FOR 50 ns; -- 374 ns
+        switch_t <= "0001"; -- Elevator arrives 1st floor
+        go_t(1) <= '0';     -- Person_2 gets out
+        come_t(1) <= '0';   -- Person_3 gets in
         WAIT;
     END PROCESS;
 END test;
