@@ -39,11 +39,18 @@ BEGIN
         ELSE  --curr_state = s3 THEN
             IF din='0' THEN
                 next_state <= s0;
+<<<<<<< HEAD
                 z <='0';
             ELSE
                 next_state <= s2;
                 z <='1';
             END IF;
+=======
+            ELSE
+                next_state <= s2;
+            END IF;
+            z <='1';
+>>>>>>> b2ed7f81b57cb95db869fbad2e339f61bdd8d6f7
         END IF;
     END PROCESS com;
     -- Seequential Part
