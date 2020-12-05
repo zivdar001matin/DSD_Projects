@@ -134,16 +134,16 @@ BEGIN
     END PROCESS com;
 
     -- Sequential Part
-    seq: PROCESS (nreset, clk, current_floor)
+    seq: PROCESS (nreset, clk)
     BEGIN
-        IF nreset = '0' THEN
-            IF      current_floor = "0001" THEN
+        IF nreset = '0' THEN    -- to_out(3 DOWNTO 2) corresponds to current_floor
+            IF      to_out(3 DOWNTO 2) = "00" THEN
                 curr_state <= s0;
-            ELSIF   current_floor = "0010" THEN
+            ELSIF   to_out(3 DOWNTO 2) = "01" THEN
                 curr_state <= s4;
-            ELSIF   current_floor = "0100" THEN
+            ELSIF   to_out(3 DOWNTO 2) = "10" THEN
                 curr_state <= s9;
-            ELSE -- current_floor = "1000" THEN
+            ELSE -- to_out(3 DOWNTO 2) = "11" THEN
                 curr_state <= s13;
             END IF;
         ELSIF clk='1' AND clk'EVENT THEN

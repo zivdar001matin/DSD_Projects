@@ -12,8 +12,8 @@ add wave -noupdate /elevator_tb/move_state_t
 add wave -noupdate /elevator_tb/CUT/curr_state
 add wave -noupdate /elevator_tb/CUT/next_state
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {503 ns} 0}
-quietly wave cursor active 1
+WaveRestoreCursors {{Cursor 1} {33 ns} 0} {{Cursor 2} {89 ns} 0} {{Cursor 3} {134 ns} 0}
+quietly wave cursor active 3
 configure wave -namecolwidth 186
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
