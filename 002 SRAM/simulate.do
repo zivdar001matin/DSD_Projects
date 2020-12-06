@@ -1,13 +1,7 @@
-------------------------------------
--- compile alu.vhd and alu_tb.vhd --
-------------------------------------
-vcom -reportprogress 300 -work work D:/%Git Repository%/GenericALU/alu.vhd
-vcom -reportprogress 300 -work work D:/%Git Repository%/GenericALU/alu_tb1.vhd
-
 ----------------------
 -- start simulation --
 ----------------------
-vsim -gui work.alu_tb -t ns
+vsim -gui work.sr_tb -t ns
 
 -----------------------------
 -- add waves to simulation --
@@ -23,4 +17,4 @@ sim:/alu_tb/t_cout \
 sim:/alu_tb/t_Ov \
 sim:/alu_tb/t_Z
 
-run 80ns
+run 320ns

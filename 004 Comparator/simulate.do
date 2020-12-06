@@ -1,11 +1,4 @@
 ----------------------
--- compile comp.vhd --
-----------------------
-vcom -reportprogress 300 -work work D:/%Git Repository%/Comparator/comp.vhd
-vcom -reportprogress 300 -work work D:/%Git Repository%/Comparator/n-bit_comp.vhd
-vcom -reportprogress 300 -work work D:/%Git Repository%/Comparator/n-bit_comp_tb.vhd
-
-----------------------
 -- start simulation --
 ----------------------
 vsim -gui work.compn_tb -t 1ns
