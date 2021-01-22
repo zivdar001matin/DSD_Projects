@@ -18,17 +18,17 @@ END myrotate;
 
 ARCHITECTURE behavioral OF myrotate IS
 BEGIN
-PROCESS(inp_header, inp_pixels, degree)
+    PROCESS(inp_header, inp_pixels, degree)
 
-    VARIABLE s_width	   : integer;
-    VARIABLE s_height	   : integer;
-    VARIABLE s_width_temp  : std_logic_vector(0 TO 3);
-    VARIABLE s_height_temp : std_logic_vector(0 TO 3);
-    VARIABLE sinf, cosf	: integer;
-    VARIABLE x0,y0		: integer;
-    VARIABLE a, b		: integer;
-    VARIABLE xx, yy		: integer;
-    VARIABLE v_pixels	: mat1d;
+        VARIABLE s_width	   : integer;
+        VARIABLE s_height	   : integer;
+        VARIABLE s_width_temp  : std_logic_vector(0 TO 3);
+        VARIABLE s_height_temp : std_logic_vector(0 TO 3);
+        VARIABLE sinf, cosf	: integer;
+        VARIABLE x0,y0		: integer;
+        VARIABLE a, b		: integer;
+        VARIABLE xx, yy		: integer;
+        VARIABLE v_pixels	: mat1d;
 
     BEGIN
 
@@ -56,8 +56,6 @@ PROCESS(inp_header, inp_pixels, degree)
         x0 := (s_width - 1) / 2;
         y0 := (s_height - 1) / 2;
 
-
-            
         FOR x IN 0 TO s_width - 1 LOOP
             FOR y IN 0 TO s_height - 1 LOOP
 
@@ -71,11 +69,12 @@ PROCESS(inp_header, inp_pixels, degree)
                     v_pixels((y * s_height + x) * 3 + 1) := inp_pixels((yy * s_height + xx) * 3 + 1);
                     v_pixels((y * s_height + x) * 3 + 2) := inp_pixels((yy * s_height + xx) * 3 + 2);
                 END IF;
+
             END LOOP;
         END LOOP;
 
         out_header <= (OTHERS => '0');
         out_pixels <= v_pixels;
 
-END PROCESS;
+    END PROCESS;
 END behavioral;
