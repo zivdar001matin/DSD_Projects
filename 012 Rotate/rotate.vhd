@@ -1,9 +1,9 @@
 LIBRARY ieee;
-USE ieee.std_logic1164.ALL;
+USE ieee.std_logic_1164.ALL;
 use ieee.numeric_std.all;
 PACKAGE basic_utils IS
 	TYPE infos IS std_logic_vector(0 to 53);
-	TYPE mat2d IS ARRAY (0 TO 1024, 0 TO 1024) OF integer RANGE 0 TO 255;
+	TYPE mat2d IS ARRAY (0 TO 15, 0 TO 3*15) OF integer RANGE 0 TO 255;
 END basic_utils;
 
 LIBRARY ieee;
