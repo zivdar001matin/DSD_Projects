@@ -8,19 +8,19 @@ END rotate_tb;
 ARCHITECTURE test OF rotate_tb IS
     COMPONENT rotate IS 
         PORT (
-            inp_header : IN infos;
+            inp_header : IN std_logic_vector(0 to 53);
             inp_pixels : IN mat2d;
             degree	   : IN integer;
-            out_header : OUT infos;
+            out_header : OUT std_logic_vector(0 to 53);
             out_pixels : OUT mat2d
         );
     END COMPONENT;
     FOR ALL  : rotate USE ENTITY work.rotate(behavioral);
 
-    SIGNAL inp_header_t : infos;
+    SIGNAL inp_header_t : std_logic_vector(0 to 53);
     SIGNAL inp_pixels_t : mat2d;
     SIGNAL degree_t	    : integer;
-    SIGNAL out_header_t : infos;
+    SIGNAL out_header_t : std_logic_vector(0 to 53);
     SIGNAL out_pixels_t : mat2d
 
     BEGIN
