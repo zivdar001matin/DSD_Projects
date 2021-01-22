@@ -17,40 +17,41 @@ ENTITY myrotate IS
 END myrotate;
 
 ARCHITECTURE behavioral OF myrotate IS
-
-SIGNAL s_width	: integer;
-SIGNAL s_height	: integer;
-SIGNAL s_width_temp : std_logic_vector(0 TO 3);
-SIGNAL s_height_temp : std_logic_vector(0 TO 3);
-
-SIGNAL sinf, cosf	: integer;
-
 BEGIN
-
-s_width_temp <= inp_header(18) & inp_header(19) & inp_header(20) & inp_header(22);
-s_width <= to_integer(unsigned(s_width_temp));
-s_height_temp <= inp_header(23) & inp_header(24) & inp_header(25) & inp_header(26);
-s_height <= to_integer(unsigned(s_height_temp));
-
-WITH degree SELECT
-    sinf <= 0	WHEN 0,
-        1	WHEN 1,
-        0	WHEN 2,
-        -1	WHEN OTHERS; -- WHEN 3
-WITH degree SELECT
-    cosf <= 1	WHEN 0,
-            0	WHEN 1,
-            -1	WHEN 2,
-            0	WHEN OTHERS; -- WHEN 3
-
 PROCESS(inp_header, inp_pixels, degree)
 
+    VARIABLE s_width	   : integer;
+    VARIABLE s_height	   : integer;
+    VARIABLE s_width_temp  : std_logic_vector(0 TO 3);
+    VARIABLE s_height_temp : std_logic_vector(0 TO 3);
+    VARIABLE sinf, cosf	: integer;
     VARIABLE x0,y0		: integer;
     VARIABLE a, b		: integer;
     VARIABLE xx, yy		: integer;
     VARIABLE v_pixels	: mat1d;
 
     BEGIN
+
+        s_width_temp := inp_header(18) & inp_header(19) & inp_header(20) & inp_header(22);
+        s_width := to_integer(unsigned(s_width_temp));
+        s_height_temp := inp_header(23) & inp_header(24) & inp_header(25) & inp_header(26);
+        s_height := to_integer(unsigned(s_height_temp));
+
+        CASE degree IS
+            WHEN 0 => sinf := 0;
+            WHEN 1 => sinf := 1;
+            WHEN 2 => sinf := 0;
+            WHEN 3 => sinf := -1;
+            WHEN OTHERS => REPORT "unreachable" SEVERITY failure;
+        END CASE;
+        
+        CASE degree IS
+            WHEN 0 => cosf := 1;
+            WHEN 1 => cosf := 0;
+            WHEN 2 => cosf := -1;
+            WHEN 3 => cosf := 0;
+            WHEN OTHERS => REPORT "unreachable" SEVERITY failure;
+        END CASE;
 
         x0 := (s_width - 1) / 2;
         y0 := (s_height - 1) / 2;
