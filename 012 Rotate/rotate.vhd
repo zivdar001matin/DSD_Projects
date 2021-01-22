@@ -1,5 +1,5 @@
 LIBRARY ieee;
-USE ieee.std_logic.ALL;
+USE ieee.std_logic1164.ALL;
 use ieee.numeric_std.all;
 PACKAGE basic_utils IS
 	TYPE infos IS std_logic_vector(0 to 53);
