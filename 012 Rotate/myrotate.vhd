@@ -38,11 +38,11 @@ BEGIN
 	Level1_1: FOR i IN 0 TO 17 GENERATE
 		s_infos(1)(i) <= inp_header(i);
 	END GENERATE Level1_1;
-	Level1_2: FOR i IN 0 TO 3 GENERATE
+	Level1_2: FOR i IN 0 TO 4 GENERATE
 		s_infos(1)(18+i) <= inp_header(23+i);
 		s_infos(1)(23+i) <= inp_header(18+i);
 	END GENERATE Level1_2;
-	Level1_3: FOR i IN 27 TO 54 GENERATE
+	Level1_3: FOR i IN 28 TO 53 GENERATE
 		s_infos(1)(i) <= inp_header(i);
 	END GENERATE Level1_3;
 
