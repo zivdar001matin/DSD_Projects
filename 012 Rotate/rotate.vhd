@@ -82,3 +82,61 @@ BEGIN
 	out_pixels <= s_pixels(degree)
 
 END concurrent;
+
+ARCHITECTURE behavioral OF rotate IS
+
+	SIGNAL s_width	: std_logic_vector(3 DOWNTO 0);
+	SIGNAL s_height	: std_logic_vector(3 DOWNTO 0);
+
+BEGIN
+
+	s_width <= to_integer(unsigned(inp_header(18) & inp_header(19) & inp_header(20) & inp_header(22)));
+	s_height <= to_integer(unsigned(inp_header(23) & inp_header(24) & inp_header(25) & inp_header(26)));
+
+    PROCESS(inp_header, inp_pixels, degree)
+
+        VARIABLE x0, x0		: integer;
+        VARIABLE a, b		: integer;
+        VARIABLE xx, yy		: integer;
+        VARIABLE sinf, cosf	: integer;
+        VARIABLE v_pixels	: mat2d;
+
+
+        BEGIN
+
+            x0 := (s_width - 1) / 2;
+            y0 := (s_height - 1) / 2;
+
+			WITH degree SELECT
+				sinf <= 0	WHEN 0,
+						1	WHEN 1,
+						0	WHEN 2,
+						-1	WHEN OTHERS; -- WHEN 3
+
+			WITH degree SELECT
+				cosf <= 1	WHEN 0,
+						0	WHEN 1,
+						-1	WHEN 2,
+						0	WHEN OTHERS; -- WHEN 3
+                
+            FOR x IN 0 TO s_width - 1 LOOP
+				FOR y IN 0 TO s_height - 1 LOOP
+
+                    a := x - x0;
+                    b := y - y0;
+                    xx := a * cosf - b * sinf + x0;
+					yy := a * sinf + b * cosf + y0;
+
+                    IF xx >= 0 AND xx < s_width AND yy >= 0 AND yy < s_height THEN
+						v_pixels((y * s_height + x) * 3 + 0) := image_input((yy * s_height + xx) * 3 + 0);
+						v_pixels((y * s_height + x) * 3 + 1) := image_input((yy * s_height + xx) * 3 + 1);
+						v_pixels((y * s_height + x) * 3 + 2) := image_input((yy * s_height + xx) * 3 + 2);
+                    END IF;
+                END LOOP;
+			END LOOP;
+
+			out_header <= (OTHERS => '0')
+			out_pixles <= v_pixels;
+
+    END PROCESS;
+END behavioral;
