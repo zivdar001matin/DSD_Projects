@@ -2,7 +2,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 use ieee.numeric_std.ALL;
 USE work.basic_utils.ALL;
-ENTITY myrotate IS
+ENTITY rotate IS
 	PORT (
 		inp_header : IN unsigned(0 TO 53);
 		inp_pixels : IN mat1d;
@@ -14,9 +14,9 @@ ENTITY myrotate IS
 		out_header : OUT unsigned(0 TO 53);
 		out_pixels : OUT mat1d
 	);
-END myrotate;
+END rotate;
 
-ARCHITECTURE behavioral OF myrotate IS
+ARCHITECTURE behavioral OF rotate IS
 BEGIN
     PROCESS(inp_header, inp_pixels, degree)
 
