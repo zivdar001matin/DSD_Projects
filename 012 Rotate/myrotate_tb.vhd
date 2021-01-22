@@ -15,20 +15,20 @@ ARCHITECTURE test OF rotate_tb IS
             out_pixels : OUT mat2d
         );
     END COMPONENT;
-    FOR ALL  : rotate USE ENTITY work.rotate(behavioral);
+    FOR ALL  : myrotate USE ENTITY work.myrotate(behavioral);
 
     SIGNAL inp_header_t : std_logic_vector(0 to 53);
     SIGNAL inp_pixels_t : mat2d;
     SIGNAL degree_t	    : integer;
     SIGNAL out_header_t : std_logic_vector(0 to 53);
-    SIGNAL out_pixels_t : mat2d
+    SIGNAL out_pixels_t : mat2d;
 
     BEGIN
     u1: rotate PORT MAP(inp_header_t, inp_pixels_t, degree_t, out_header_t, out_pixels_t);
 
     PROCESS BEGIN
 
-        inp_header_t <= "00000000000000000_0101_0101_00000000000000000000000000000"
+        inp_header_t <= "000000000000000000101010100000000000000000000000000000";
         inp_pixels_t <= (
                         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -44,7 +44,7 @@ ARCHITECTURE test OF rotate_tb IS
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                         )
 
         WAIT FOR 5 ns;
