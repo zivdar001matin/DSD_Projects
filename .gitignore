@@ -3,6 +3,8 @@ work/
 
 # ignore wave logs
 *.wlf
+*.opt
+*.ini
 
 *.png
 *.jpg
