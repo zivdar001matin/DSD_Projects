@@ -56,8 +56,8 @@ BEGIN
         x0 := (s_width - 1) / 2;
         y0 := (s_height - 1) / 2;
 
-        FOR x IN 0 TO s_width - 1 LOOP
-            FOR y IN 0 TO s_height - 1 LOOP
+        FOR x IN 0 TO 15 LOOP
+            FOR y IN 0 TO 15 LOOP
 
                 a := x - x0;
                 b := y - y0;
@@ -68,6 +68,10 @@ BEGIN
                     v_pixels((y * s_height + x) * 3 + 0) := inp_pixels((yy * s_height + xx) * 3 + 0);
                     v_pixels((y * s_height + x) * 3 + 1) := inp_pixels((yy * s_height + xx) * 3 + 1);
                     v_pixels((y * s_height + x) * 3 + 2) := inp_pixels((yy * s_height + xx) * 3 + 2);
+                ELSE
+                    v_pixels((y * s_height + x) * 3 + 0) := inp_pixels((y * s_height + x) * 3 + 0);
+                    v_pixels((y * s_height + x) * 3 + 1) := inp_pixels((y * s_height + x) * 3 + 1);
+                    v_pixels((y * s_height + x) * 3 + 2) := inp_pixels((y * s_height + x) * 3 + 2);
                 END IF;
 
             END LOOP;
